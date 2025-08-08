@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Test - React Ecommerce</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="status" id="status">Loading...</div>
+    
+    <div class="container">
+        <div class="hero">
+            <h1>React Ecommerce</h1>
+            <p>Simple test version to check deployment</p>
+        </div>
+        
+        <div class="card">
+            <h2>🛍️ Features Working</h2>
+            <p>This is a simplified version to test if the basic website loads correctly.</p>
+            <button class="btn" onclick="testFeature('Products')">Test Products</button>
+            <button class="btn" onclick="testFeature('Cart')">Test Cart</button>
+            <button class="btn" onclick="testFeature('AI')">Test AI</button>
+        </div>
+        
+        <div class="card">
+            <h2>🔧 Debug Info</h2>
+            <div id="debug-info">
+                <p><strong>URL:</strong> <span id="current-url"></span></p>
+                <p><strong>User Agent:</strong> <span id="user-agent"></span></p>
+                <p><strong>Screen:</strong> <span id="screen-info"></span></p>
+                <p><strong>Time:</strong> <span id="current-time"></span></p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>🎯 Navigation</h2>
+            <a href="index.html" style="color: white; text-decoration: none;">
+                <button class="btn">Go to Full Website</button>
+            </a>
+            <a href="test.html" style="color: white; text-decoration: none;">
+                <button class="btn">Go to Test Page</button>
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        // Update status
+        document.getElementById('status').textContent = '✅ Loaded Successfully';
+        
+        // Update debug info
+        document.getElementById('current-url').textContent = window.location.href;
+        document.getElementById('user-agent').textContent = navigator.userAgent.substring(0, 80) + '...';
+        document.getElementById('screen-info').textContent = `${screen.width}x${screen.height}`;
+        document.getElementById('current-time').textContent = new Date().toLocaleString();
+        
+        // Test feature function
+        function testFeature(feature) {
+            alert(`${feature} feature test - This would normally load the ${feature.toLowerCase()} section`);
+            console.log(`Testing ${feature} feature`);
+        }
+        
+        // Log successful load
+        console.log('Simple test page loaded successfully');
+        console.log('All basic features working');
+    </script>
+</body>
+</html>
