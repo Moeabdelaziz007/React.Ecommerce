@@ -408,14 +408,218 @@ function connectWallet(walletType) {
     app.connectWallet(walletType);
 }
 
+// Loading Screen Handler
+class LoadingHandler {
+    constructor() {
+        this.loadingScreen = document.getElementById('loading-screen');
+        this.mainContent = document.getElementById('main-content');
+        this.loadingProgress = document.querySelector('.loading-progress');
+        this.loadingPercentage = document.querySelector('.loading-percentage');
+        this.particlesContainer = document.getElementById('particles');
+        
+        this.startLoading();
+    }
+    
+    startLoading() {
+        console.log('Starting loading sequence...');
+        this.createParticles();
+        this.animateProgress();
+    }
+    
+    createParticles() {
+        if (!this.particlesContainer) return;
+        
+        // Create floating particles
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.cssText = `
+                position: absolute;
+                width: ${Math.random() * 4 + 2}px;
+                height: ${Math.random() * 4 + 2}px;
+                background: rgba(255, 255, 255, 0.6);
+                border-radius: 50%;
+                left: ${Math.random() * 100}%;
+                top: ${Math.random() * 100}%;
+                animation: floatParticle ${Math.random() * 3 + 2}s ease-in-out infinite;
+                animation-delay: ${Math.random() * 2}s;
+            `;
+            this.particlesContainer.appendChild(particle);
+        }
+        
+        // Add particle animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatParticle {
+                0%, 100% { 
+                    transform: translateY(0px) translateX(0px) scale(1); 
+                    opacity: 0.6;
+                }
+                25% { 
+                    transform: translateY(-20px) translateX(10px) scale(1.2); 
+                    opacity: 1;
+                }
+                50% { 
+                    transform: translateY(-40px) translateX(-10px) scale(0.8); 
+                    opacity: 0.8;
+                }
+                75% { 
+                    transform: translateY(-20px) translateX(15px) scale(1.1); 
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    animateProgress() {
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 15 + 5; // Random increment
+            
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                setTimeout(() => this.finishLoading(), 500);
+            }
+            
+            if (this.loadingProgress) {
+                this.loadingProgress.style.width = progress + '%';
+            }
+            if (this.loadingPercentage) {
+                this.loadingPercentage.textContent = Math.floor(progress) + '%';
+            }
+        }, 100);
+    }
+    
+    finishLoading() {
+        console.log('Loading complete, transitioning to main content...');
+        
+        // Add fade out animation to loading screen
+        this.loadingScreen.classList.add('fade-out');
+        
+        // Show main content after loading screen fades
+        setTimeout(() => {
+            this.loadingScreen.style.display = 'none';
+            this.mainContent.style.display = 'block';
+            
+            // Trigger main content fade in
+            setTimeout(() => {
+                this.mainContent.classList.add('loaded');
+                
+                // Initialize main app
+                try {
+                    window.app = new EcommerceApp();
+                    console.log('EcommerceApp initialized successfully');
+                } catch (error) {
+                    console.error('Error initializing EcommerceApp:', error);
+                }
+            }, 100);
+        }, 1000);
+    }
+}
+
+// 3D Hero Animation Handler
+class Hero3DAnimations {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        this.createHeroParticles();
+        this.addMouseInteraction();
+    }
+    
+    createHeroParticles() {
+        const heroBackground = document.querySelector('.hero-3d-background');
+        if (!heroBackground) return;
+        
+        // Create additional floating particles for hero section
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'hero-particle';
+            particle.style.cssText = `
+                position: absolute;
+                width: ${Math.random() * 6 + 3}px;
+                height: ${Math.random() * 6 + 3}px;
+                background: rgba(255, 255, 255, 0.4);
+                border-radius: 50%;
+                left: ${Math.random() * 100}%;
+                top: ${Math.random() * 100}%;
+                animation: heroFloatParticle ${Math.random() * 4 + 3}s ease-in-out infinite;
+                animation-delay: ${Math.random() * 3}s;
+                pointer-events: none;
+            `;
+            heroBackground.appendChild(particle);
+        }
+        
+        // Add hero particle animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes heroFloatParticle {
+                0%, 100% { 
+                    transform: translateY(0px) translateX(0px) scale(1) rotate(0deg); 
+                    opacity: 0.4;
+                }
+                25% { 
+                    transform: translateY(-30px) translateX(20px) scale(1.3) rotate(90deg); 
+                    opacity: 0.8;
+                }
+                50% { 
+                    transform: translateY(-60px) translateX(-20px) scale(0.7) rotate(180deg); 
+                    opacity: 1;
+                }
+                75% { 
+                    transform: translateY(-30px) translateX(25px) scale(1.2) rotate(270deg); 
+                    opacity: 0.6;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    addMouseInteraction() {
+        const heroSection = document.querySelector('.hero-section');
+        if (!heroSection) return;
+        
+        heroSection.addEventListener('mousemove', (e) => {
+            const rect = heroSection.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
+            
+            // Move floating elements based on mouse position
+            const floatingElements = heroSection.querySelectorAll('.floating-cube, .floating-sphere, .floating-pyramid');
+            floatingElements.forEach((element, index) => {
+                const intensity = (index + 1) * 0.5;
+                const moveX = (x - 0.5) * intensity * 20;
+                const moveY = (y - 0.5) * intensity * 20;
+                
+                element.style.transform = `translate(${moveX}px, ${moveY}px) rotateX(${moveY}deg) rotateY(${moveX}deg)`;
+            });
+            
+            // Parallax effect for floating cards
+            const floatingCards = heroSection.querySelectorAll('.floating-card');
+            floatingCards.forEach((card, index) => {
+                const intensity = (index + 1) * 0.3;
+                const moveX = (x - 0.5) * intensity * 15;
+                const moveY = (y - 0.5) * intensity * 15;
+                
+                card.style.transform = `translate(${moveX}px, ${moveY}px) rotateY(${moveX * 0.5}deg)`;
+            });
+        });
+    }
+}
+
 // Initialize app when DOM is loaded
 let app;
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, initializing EcommerceApp...');
-    try {
-        app = new EcommerceApp();
-        console.log('EcommerceApp initialized successfully');
-    } catch (error) {
-        console.error('Error initializing EcommerceApp:', error);
-    }
+    console.log('DOM loaded, starting enhanced loading experience...');
+    
+    // Start loading handler
+    new LoadingHandler();
+    
+    // Initialize 3D animations after a delay
+    setTimeout(() => {
+        new Hero3DAnimations();
+    }, 2000);
 });
