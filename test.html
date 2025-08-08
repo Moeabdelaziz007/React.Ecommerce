@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px;
+            text-align: center;
+        }
+        .test-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 20px auto;
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-card">
+        <h1>🧪 Website Test Page</h1>
+        <p>If you can see this page, the basic HTML/CSS is working!</p>
+        <p><strong>Test Time:</strong> <span id="time"></span></p>
+        <button onclick="testJS()" style="padding: 10px 20px; margin: 10px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Test JavaScript</button>
+        <a href="index.html" style="display: inline-block; padding: 10px 20px; margin: 10px; background: #2196F3; color: white; text-decoration: none; border-radius: 5px;">Go to Main Site</a>
+        <div id="result" style="margin-top: 20px;"></div>
+    </div>
+    
+    <script>
+        // Update time
+        document.getElementById('time').textContent = new Date().toLocaleString();
+        
+        // Test JavaScript function
+        function testJS() {
+            const result = document.getElementById('result');
+            result.innerHTML = '<p style="color: #4CAF50;">✅ JavaScript is working!</p>';
+        }
+        
+        // Test if external resources load
+        console.log('Test page loaded successfully');
+        console.log('Current URL:', window.location.href);
+    </script>
+</body>
+</html>
