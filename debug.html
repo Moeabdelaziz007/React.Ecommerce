@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - React Ecommerce</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .debug-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .status-item {
+            background: rgba(255, 255, 255, 0.1);
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+        }
+        .error {
+            border-left-color: #f44336;
+        }
+        .warning {
+            border-left-color: #ff9800;
+        }
+        .test-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        .test-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        #console-output {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <h1>🔧 React Ecommerce Debug Center</h1>
+        <p>Comprehensive debugging tools for the enhanced website</p>
+        
+        <div class="status-item">
+            <h3>📍 Current Status</h3>
+            <p><strong>URL:</strong> <span id="current-url"></span></p>
+            <p><strong>User Agent:</strong> <span id="user-agent"></span></p>
+            <p><strong>Screen:</strong> <span id="screen-info"></span></p>
+            <p><strong>Time:</strong> <span id="current-time"></span></p>
+            <p><strong>Local Storage:</strong> <span id="storage-info"></span></p>
+        </div>
+        
+        <div class="status-item">
+            <h3>🧪 File Tests</h3>
+            <button class="test-btn" onclick="testFiles()">Test All Files</button>
+            <button class="test-btn" onclick="testCSS()">Test CSS Loading</button>
+            <button class="test-btn" onclick="testJS()">Test JavaScript</button>
+            <button class="test-btn" onclick="testImages()">Test Images</button>
+            <div id="file-test-results"></div>
+        </div>
+        
+        <div class="status-item">
+            <h3>🎭 Loading Screen Test</h3>
+            <button class="test-btn" onclick="testLoadingScreen()">Test Loading Animation</button>
+            <button class="test-btn" onclick="testParticles()">Test Particles</button>
+            <button class="test-btn" onclick="test3DElements()">Test 3D Elements</button>
+            <div id="loading-test-results"></div>
+        </div>
+        
+        <div class="status-item">
+            <h3>🌐 External Resources</h3>
+            <button class="test-btn" onclick="testExternalResources()">Test CDN Resources</button>
+            <div id="external-test-results"></div>
+        </div>
+        
+        <div class="status-item">
+            <h3>📱 Navigation</h3>
+            <a href="index.html" style="color: white; text-decoration: none;">
+                <button class="test-btn">Go to Main Site</button>
+            </a>
+            <a href="simple.html" style="color: white; text-decoration: none;">
+                <button class="test-btn">Simple Test Page</button>
+            </a>
+            <a href="test.html" style="color: white; text-decoration: none;">
+                <button class="test-btn">Basic Test Page</button>
+            </a>
+        </div>
+        
+        <div class="status-item">
+            <h3>🖥️ Console Output</h3>
+            <button class="test-btn" onclick="clearConsole()">Clear Console</button>
+            <pre id="console-output"></pre>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize debug info
+        document.getElementById('current-url').textContent = window.location.href;
+        document.getElementById('user-agent').textContent = navigator.userAgent.substring(0, 100) + '...';
+        document.getElementById('screen-info').textContent = `${screen.width}x${screen.height} (${window.innerWidth}x${window.innerHeight})`;
+        document.getElementById('current-time').textContent = new Date().toLocaleString();
+        
+        // Check local storage
+        try {
+            const storageTest = localStorage.getItem('cart') || 'empty';
+            document.getElementById('storage-info').textContent = `Working (${storageTest.length} chars)`;
+        } catch (e) {
+            document.getElementById('storage-info').textContent = `Error: ${e.message}`;
+        }
+        
+        // Console capture
+        const consoleOutput = document.getElementById('console-output');
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        
+        function addToConsole(type, message) {
+            const timestamp = new Date().toLocaleTimeString();
+            consoleOutput.textContent += `[${timestamp}] ${type}: ${message}\n`;
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addToConsole('LOG', args.join(' '));
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addToConsole('ERROR', args.join(' '));
+        };
+        
+        console.warn = function(...args) {
+            originalWarn.apply(console, args);
+            addToConsole('WARN', args.join(' '));
+        };
+        
+        // Test functions
+        function testFiles() {
+            const results = document.getElementById('file-test-results');
+            results.innerHTML = '<p>Testing files...</p>';
+            
+            const filesToTest = [
+                'styles/main.css',
+                'js/main.js',
+                'assets/logo.svg'
+            ];
+            
+            let testResults = '<h4>File Test Results:</h4>';
+            let testsCompleted = 0;
+            
+            filesToTest.forEach(file => {
+                fetch(file)
+                    .then(response => {
+                        testResults += `<p>✅ ${file} - ${response.status} (${response.statusText})</p>`;
+                        testsCompleted++;
+                        if (testsCompleted === filesToTest.length) {
+                            results.innerHTML = testResults;
+                        }
+                    })
+                    .catch(error => {
+                        testResults += `<p>❌ ${file} - Error: ${error.message}</p>`;
+                        testsCompleted++;
+                        if (testsCompleted === filesToTest.length) {
+                            results.innerHTML = testResults;
+                        }
+                    });
+            });
+        }
+        
+        function testCSS() {
+            const results = document.getElementById('file-test-results');
+            const testElement = document.createElement('div');
+            testElement.className = 'glass-card';
+            testElement.style.width = '100px';
+            testElement.style.height = '100px';
+            document.body.appendChild(testElement);
+            
+            const computedStyle = window.getComputedStyle(testElement);
+            const backdropFilter = computedStyle.backdropFilter || computedStyle.webkitBackdropFilter;
+            
+            document.body.removeChild(testElement);
+            
+            results.innerHTML = `<h4>CSS Test Results:</h4>
+                <p>Glass morphism support: ${backdropFilter ? '✅ Yes' : '❌ No'}</p>
+                <p>Transform support: ${computedStyle.transform !== 'none' ? '✅ Yes' : '❌ No'}</p>
+                <p>Animation support: ${CSS.supports('animation', 'test 1s') ? '✅ Yes' : '❌ No'}</p>`;
+        }
+        
+        function testJS() {
+            const results = document.getElementById('file-test-results');
+            let jsResults = '<h4>JavaScript Test Results:</h4>';
+            
+            // Test ES6 features
+            try {
+                const testArrow = () => 'arrow functions work';
+                const testClass = class TestClass { constructor() { this.test = true; } };
+                const testDestructure = {a: 1, b: 2};
+                const {a, b} = testDestructure;
+                
+                jsResults += '<p>✅ ES6 Features: Arrow functions, classes, destructuring</p>';
+            } catch (e) {
+                jsResults += `<p>❌ ES6 Features: ${e.message}</p>`;
+            }
+            
+            // Test DOM APIs
+            try {
+                document.querySelector('body');
+                document.getElementById('console-output');
+                jsResults += '<p>✅ DOM APIs: querySelector, getElementById</p>';
+            } catch (e) {
+                jsResults += `<p>❌ DOM APIs: ${e.message}</p>`;
+            }
+            
+            // Test localStorage
+            try {
+                localStorage.setItem('test', 'value');
+                localStorage.removeItem('test');
+                jsResults += '<p>✅ LocalStorage: Working</p>';
+            } catch (e) {
+                jsResults += `<p>❌ LocalStorage: ${e.message}</p>`;
+            }
+            
+            results.innerHTML = jsResults;
+        }
+        
+        function testImages() {
+            const results = document.getElementById('file-test-results');
+            const testImg = new Image();
+            
+            testImg.onload = function() {
+                results.innerHTML = '<h4>Image Test Results:</h4><p>✅ Logo SVG loads successfully</p>';
+            };
+            
+            testImg.onerror = function() {
+                results.innerHTML = '<h4>Image Test Results:</h4><p>❌ Logo SVG failed to load</p>';
+            };
+            
+            testImg.src = 'assets/logo.svg';
+        }
+        
+        function testLoadingScreen() {
+            const results = document.getElementById('loading-test-results');
+            results.innerHTML = '<h4>Loading Screen Test:</h4><p>🔄 Creating test loading elements...</p>';
+            
+            // Create test loading elements
+            const testContainer = document.createElement('div');
+            testContainer.innerHTML = `
+                <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px;">
+                    <div class="logo-3d" style="perspective: 1000px;">
+                        <div class="logo-cube" style="width: 50px; height: 50px; margin: 0 auto; transform-style: preserve-3d; animation: rotateCube 2s infinite linear;">
+                            <div class="cube-face front" style="position: absolute; width: 50px; height: 50px; background: linear-gradient(45deg, #6366F1, #8B5CF6); display: flex; align-items: center; justify-content: center; color: white; transform: rotateY(0deg) translateZ(25px);">T</div>
+                        </div>
+                    </div>
+                    <p style="color: white; text-align: center; margin: 10px 0;">Test Loading Animation</p>
+                    <button onclick="this.parentElement.remove()" style="background: #f44336; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Close</button>
+                </div>
+            `;
+            
+            document.body.appendChild(testContainer);
+            
+            results.innerHTML = '<h4>Loading Screen Test:</h4><p>✅ Test loading animation created (check center of screen)</p>';
+        }
+        
+        function testParticles() {
+            const results = document.getElementById('loading-test-results');
+            results.innerHTML = '<h4>Particles Test:</h4><p>🔄 Creating test particles...</p>';
+            
+            // Create test particles
+            for (let i = 0; i < 10; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: fixed;
+                    width: 5px;
+                    height: 5px;
+                    background: white;
+                    border-radius: 50%;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation: testFloat 3s ease-in-out infinite;
+                    animation-delay: ${Math.random() * 2}s;
+                    z-index: 9998;
+                    pointer-events: none;
+                `;
+                document.body.appendChild(particle);
+                
+                // Remove after 5 seconds
+                setTimeout(() => {
+                    if (particle.parentElement) {
+                        particle.remove();
+                    }
+                }, 5000);
+            }
+            
+            // Add animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes testFloat {
+                    0%, 100% { transform: translateY(0px); opacity: 0.6; }
+                    50% { transform: translateY(-20px); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            results.innerHTML = '<h4>Particles Test:</h4><p>✅ Test particles created (10 floating white dots, auto-remove in 5s)</p>';
+        }
+        
+        function test3DElements() {
+            const results = document.getElementById('loading-test-results');
+            results.innerHTML = '<h4>3D Elements Test:</h4><p>🔄 Testing 3D CSS support...</p>';
+            
+            const test3D = document.createElement('div');
+            test3D.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+                background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+                transform-style: preserve-3d;
+                animation: test3DRotate 3s infinite linear;
+                z-index: 9999;
+                border-radius: 10px;
+            `;
+            
+            const style3D = document.createElement('style');
+            style3D.textContent = `
+                @keyframes test3DRotate {
+                    0% { transform: rotateX(0deg) rotateY(0deg); }
+                    100% { transform: rotateX(360deg) rotateY(360deg); }
+                }
+            `;
+            document.head.appendChild(style3D);
+            document.body.appendChild(test3D);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                if (test3D.parentElement) {
+                    test3D.remove();
+                }
+                style3D.remove();
+            }, 5000);
+            
+            results.innerHTML = '<h4>3D Elements Test:</h4><p>✅ 3D test cube created (top-right corner, auto-remove in 5s)</p>';
+        }
+        
+        function testExternalResources() {
+            const results = document.getElementById('external-test-results');
+            results.innerHTML = '<p>Testing external resources...</p>';
+            
+            const resources = [
+                'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
+                'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
+                'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
+            ];
+            
+            let testResults = '<h4>External Resources Test:</h4>';
+            let testsCompleted = 0;
+            
+            resources.forEach(url => {
+                fetch(url, { method: 'HEAD' })
+                    .then(response => {
+                        testResults += `<p>✅ ${url.split('/').pop()} - ${response.status}</p>`;
+                        testsCompleted++;
+                        if (testsCompleted === resources.length) {
+                            results.innerHTML = testResults;
+                        }
+                    })
+                    .catch(error => {
+                        testResults += `<p>❌ ${url.split('/').pop()} - Error</p>`;
+                        testsCompleted++;
+                        if (testsCompleted === resources.length) {
+                            results.innerHTML = testResults;
+                        }
+                    });
+            });
+        }
+        
+        function clearConsole() {
+            document.getElementById('console-output').textContent = '';
+        }
+        
+        // Log initial status
+        console.log('Debug page loaded successfully');
+        console.log('All test functions initialized');
+        console.log('Ready for debugging!');
+    </script>
+</body>
+</html>
