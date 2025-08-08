@@ -1,8 +1,8 @@
 {
-  "name": "ecommerce",
-  "version": "0.1.0",
+  "name": "react-ecommerce-frontend",
+  "version": "1.0.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://moeabdelaziz007.github.io/React.Ecommerce",
   "dependencies": {
     "@coinbase/wallet-sdk": "^4.3.7",
     "@reduxjs/toolkit": "^1.9.7",
@@ -56,16 +56,9 @@
     "web3": "^1.3.3"
   },
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "start:test": "TEST_MODE=json PORT=4001 concurrently \"npm run server\" \"PORT=3000 npm run client\"",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "node ./api/server.js",
-    "client": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts --openssl-legacy-provider build",
-    "test": "react-scripts eject",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "start": "python3 -m http.server 8000",
+    "serve": "python3 -m http.server 8000",
+    "deploy": "gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": [
