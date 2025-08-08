@@ -2,6 +2,7 @@
   "name": "ecommerce",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@coinbase/wallet-sdk": "^4.3.7",
     "@reduxjs/toolkit": "^1.9.7",
@@ -62,7 +63,9 @@
     "client": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts eject",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -81,5 +84,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
 }
