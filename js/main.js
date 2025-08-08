@@ -427,24 +427,32 @@ class LoadingHandler {
     }
     
     createParticles() {
-        if (!this.particlesContainer) return;
+        if (!this.particlesContainer) {
+            console.warn('Particles container not found, skipping particle creation');
+            return;
+        }
         
-        // Create floating particles
-        for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.cssText = `
-                position: absolute;
-                width: ${Math.random() * 4 + 2}px;
-                height: ${Math.random() * 4 + 2}px;
-                background: rgba(255, 255, 255, 0.6);
-                border-radius: 50%;
-                left: ${Math.random() * 100}%;
-                top: ${Math.random() * 100}%;
-                animation: floatParticle ${Math.random() * 3 + 2}s ease-in-out infinite;
-                animation-delay: ${Math.random() * 2}s;
-            `;
-            this.particlesContainer.appendChild(particle);
+        try {
+            // Create floating particles
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${Math.random() * 4 + 2}px;
+                    height: ${Math.random() * 4 + 2}px;
+                    background: rgba(255, 255, 255, 0.6);
+                    border-radius: 50%;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation: floatParticle ${Math.random() * 3 + 2}s ease-in-out infinite;
+                    animation-delay: ${Math.random() * 2}s;
+                `;
+                this.particlesContainer.appendChild(particle);
+            }
+            console.log('Created 50 loading particles successfully');
+        } catch (error) {
+            console.error('Error creating particles:', error);
         }
         
         // Add particle animation CSS
@@ -496,25 +504,33 @@ class LoadingHandler {
         console.log('Loading complete, transitioning to main content...');
         
         // Add fade out animation to loading screen
-        this.loadingScreen.classList.add('fade-out');
+        if (this.loadingScreen) {
+            this.loadingScreen.classList.add('fade-out');
+        }
         
         // Show main content after loading screen fades
         setTimeout(() => {
-            this.loadingScreen.style.display = 'none';
-            this.mainContent.style.display = 'block';
-            
-            // Trigger main content fade in
-            setTimeout(() => {
-                this.mainContent.classList.add('loaded');
+            if (this.loadingScreen) {
+                this.loadingScreen.style.display = 'none';
+            }
+            if (this.mainContent) {
+                this.mainContent.style.display = 'block';
                 
-                // Initialize main app
-                try {
-                    window.app = new EcommerceApp();
-                    console.log('EcommerceApp initialized successfully');
-                } catch (error) {
-                    console.error('Error initializing EcommerceApp:', error);
-                }
-            }, 100);
+                // Trigger main content fade in
+                setTimeout(() => {
+                    this.mainContent.classList.add('loaded');
+                    
+                    // Initialize main app
+                    try {
+                        window.app = new EcommerceApp();
+                        console.log('EcommerceApp initialized successfully');
+                        console.log('All animations and interactions ready');
+                    } catch (error) {
+                        console.error('Error initializing EcommerceApp:', error);
+                        console.error('Stack trace:', error.stack);
+                    }
+                }, 100);
+            }
         }, 1000);
     }
 }
