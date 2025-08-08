@@ -1,0 +1,40 @@
+Test Case ID,Description,Preconditions,Steps to Reproduce,Expected Result,Actual Result,Status
+TC-PROD-001,Load product listing page,"Backend running (TEST_MODE=json), Frontend running", "1. Navigate to /product
+2. Wait for products to load","Product grid renders with items, images, names, and prices","As expected","Pass"
+TC-PROD-002,Filter products by category (listing page),Products exist across categories,"1. Open /product
+2. Use any category filter (if available) or navigate to category route","Only products from selected category are shown; URL or state reflects filter","As expected/No native filter present; manual filter feature missing","Pass/Info"
+TC-PROD-003,Open product details page,At least one product available,"1. From /product click a product
+2. Verify details page","Details page shows image, name, price, description; variant/size visible if applicable","As expected","Pass"
+TC-PROD-004,Variant selection reflects in UI (details or card),Product has variants,"1. Open a product with variants
+2. Change variant in dropdown","Selected variant displayed/retained in UI and used on add-to-cart","Variant reflected in UI; cart variant handling pending","Pass (UI)"
+TC-CART-001,Add in-stock product to cart,At least one in-stock product,"1. On listing or details page click Add to Cart","Toast shows success; cart badge increments; item appears in /cart","As expected","Pass"
+TC-CART-002,Attempt to add out-of-stock product,One out-of-stock item present,"1. Find product with Out of Stock
+2. Try to click Add to Cart","Button disabled or replaced by 'Out of Stock'; no add occurs","Button disabled; no add","Pass"
+TC-CART-003,Add multiple variants of same product,Product with variants present,"1. Select variant S and add
+2. Select variant M and add
+3. Open /cart","Two separate cart lines distinguishable by variant","Variants not shown in cart (see bug)","Fail"
+TC-CART-004,Increase quantity from cart page,Cart has an item,"1. Go to /cart
+2. Click + to increase qty","Quantity increments and subtotal updates precisely","As expected; check precision","Pass"
+TC-CART-005,Decrease quantity and remove from cart,Cart has qty >=2 item,"1. Click - until qty=1 then - again","Qty decrements; at 0 item removed; totals update","As expected","Pass"
+TC-CART-006,Remove item using delete action,Cart has at least one item,"1. Click trash/remove icon","Item removed; totals and badge update","As expected","Pass"
+TC-CART-007,Cart persistence after refresh,Items present in cart,"1. Refresh browser
+2. Return to /cart","Items persist via localStorage without duplication/errors","As expected","Pass"
+TC-CHK-001,Checkout page loads and validates required fields,Items present in cart,"1. Open /checkout
+2. Submit without filling fields","Validation errors visible; submission blocked","As expected (basic validation) or Not implemented","Info"
+TC-RESP-001,Responsive grid on mobile,Use devtools mobile view (iPhone X),"1. Open /product
+2. Resize to 375px width","Grid stacks to 1–2 columns; text and buttons readable; no overflow","As expected","Pass"
+TC-RESP-002,Navbar collapses and toggler works,Mobile width,"1. Open any page at <768px
+2. Tap navbar toggler","Menu expands/collapses without layout shift","As expected","Pass"
+TC-OOS-001,Out-of-stock badging clarity,Out-of-stock product present,"1. Locate out-of-stock item
+2. Inspect badges and button state","Clear badge 'Out of Stock' and disabled button; accessible label","Badge visible; disabled button present","Pass"
+TC-ERR-001,Network error while loading products,Simulate offline or stop backend,"1. Open /product during offline
+2. Observe UI","Graceful error state or fallback message without crashes","Generic spinner/console error; no crash","Pass/Info"
+TC-ERR-002,Network error on Add to Cart,Simulate offline after page load,"1. Click Add to Cart while offline","Error toast and no cart mutation","As expected (toast), if implemented","Info"
+TC-A11Y-001,Keyboard accessibility for Add to Cart,None,"1. Tab to product card button
+2. Press Enter/Space","Adds to cart; focus remains predictable; visible outline","Works; ensure outline visible","Pass/Info"
+TC-AI-001,AI Catalog Smart mode basic query,None,"1. Open /ai
+2. Enter 'running shoes under $100'","Filtered results ≤$100 in Shoes; recommendations visible","As expected","Pass"
+TC-AI-002,Dynamic Pricing controls affect price,None,"1. /ai → Pricing mode
+2. Increase demand & enable peak","Adjusted price increases by rule; base price shown with strike","As expected","Pass"
+TC-BC-001,Wallet connect/disconnect (MetaMask),MetaMask installed,"1. Open /blockchain
+2. Connect, switch networks, disconnect","UI reflects address, network; test tx shows lifecycle","As expected","Pass" 

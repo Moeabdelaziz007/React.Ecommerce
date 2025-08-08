@@ -1,0 +1,53 @@
+/* Hero Section */
+.blockchain-hero {
+  position: relative;
+  background: radial-gradient(1200px 600px at 50% -200px, rgba(79,70,229,0.30), transparent 60%),
+              linear-gradient(135deg, #0f172a 0%, #111827 100%);
+  color: #fff;
+  overflow: hidden;
+}
+
+.blockchain-hero .hero-title {
+  font-weight: 900;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 40%, #f472b6 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.blockchain-hero .hero-subtitle {
+  color: rgba(255,255,255,0.8);
+  font-weight: 500;
+}
+
+.hero-badge {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(800px 300px at 50% 10%, rgba(124,58,237,0.35), transparent),
+              radial-gradient(600px 240px at 20% 10%, rgba(236,72,153,0.25), transparent),
+              radial-gradient(600px 240px at 80% 15%, rgba(59,130,246,0.25), transparent);
+  mix-blend-mode: screen;
+  filter: blur(30px);
+}
+
+/* Page helpers */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.06) !important;
+  border-radius: 16px !important;
+} 

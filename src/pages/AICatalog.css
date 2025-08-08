@@ -1,0 +1,41 @@
+/* AI Catalog hero */
+.ai-hero {
+  position: relative;
+  background: radial-gradient(1200px 600px at 50% -200px, rgba(59,130,246,0.25), transparent 60%),
+              linear-gradient(135deg, #0f172a 0%, #111827 100%);
+  color: #fff;
+  overflow: hidden;
+}
+.ai-hero .hero-title {
+  font-weight: 900;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 0%, #93c5fd 40%, #f472b6 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.ai-hero .hero-subtitle { color: rgba(255,255,255,0.85); font-weight: 500; }
+.hero-badge { background: rgba(255,255,255,0.15); color: #fff; border-radius: 999px; padding: 0.35rem 0.75rem; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.hero-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(800px 300px at 50% 10%, rgba(59,130,246,0.35), transparent), radial-gradient(600px 240px at 20% 10%, rgba(236,72,153,0.25), transparent), radial-gradient(600px 240px at 80% 15%, rgba(124,58,237,0.25), transparent); mix-blend-mode: screen; filter: blur(30px); }
+
+/* Glass card */
+.glass-card { background: rgba(255, 255, 255, 0.7) !important; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.35) !important; box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.06) !important; border-radius: 16px !important; }
+
+/* Toggle segment */
+.toggle-segment { display: inline-flex; gap: 6px; }
+.toggle-segment .btn { border-radius: 999px; font-weight: 700; }
+
+/* Adjusted price badge */
+.badge-adjusted { background: linear-gradient(135deg, #f59e0b, #ef4444); color: #fff; border-radius: 6px; padding: 0.25rem 0.5rem; font-weight: 700; } 
+
+/* Recommendation tiles */
+.recs-tile { background: #ffffff; border: 1px solid rgba(0,0,0,0.06); border-radius: 12px; padding: .75rem; box-shadow: 0 6px 16px rgba(0,0,0,.06); transition: transform .2s ease, box-shadow .2s ease; }
+.recs-tile:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(0,0,0,.08); }
+.recs-icon { font-size: 1.25rem; }
+.recs-name { font-size: .85rem; font-weight: 700; margin-top: .25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.recs-meta { font-size: .75rem; color: #6b7280; }
+.recs-price { font-size: .8rem; font-weight: 800; }
+
+/* Toggle buttons with better hit area */
+.toggle-segment .btn { padding: .5rem .85rem; } 

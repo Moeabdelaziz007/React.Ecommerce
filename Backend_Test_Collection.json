@@ -1,0 +1,80 @@
+{
+  "info": {
+    "name": "E-commerce Product API Test",
+    "description": "Backend Developer Test - Product API endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET All Products",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4001/api/v1/products",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4001",
+          "path": ["api", "v1", "products"]
+        }
+      }
+    },
+    {
+      "name": "GET Product by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4001/api/v1/products/123245",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4001",
+          "path": ["api", "v1", "products", "123245"]
+        }
+      }
+    },
+    {
+      "name": "GET Products by Category",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4001/api/v1/products?category=Apparel",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4001",
+          "path": ["api", "v1", "products"],
+          "query": [
+            {
+              "key": "category",
+              "value": "Apparel"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "POST Create Product",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"New Product\",\n  \"description\": \"Product description\",\n  \"price\": 29.99,\n  \"category\": \"Electronics\",\n  \"imageUrl\": \"https://example.com/image.jpg\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:4001/api/v1/products",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4001",
+          "path": ["api", "v1", "products"]
+        }
+      }
+    }
+  ]
+} 

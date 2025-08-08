@@ -1,0 +1,104 @@
+[
+  {
+    "id": "123245",
+    "title": "A Book",
+    "imageUrl": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=800&auto=format&fit=crop",
+    "description": "This is an awesome book!",
+    "price": "19"
+  },
+  {
+    "id": "0.41607315815753076",
+    "title": "Classic White T-Shirt",
+    "imageUrl": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=800&auto=format&fit=crop",
+    "description": "Premium cotton comfort",
+    "price": "12"
+  },
+  {
+    "id": "1754639233525",
+    "title": "Test Shirt",
+    "description": "Cotton tee",
+    "price": 25,
+    "imageUrl": "https://images.unsplash.com/photo-1503341504253-dff4815485f1?q=80&w=800&auto=format&fit=crop",
+    "category": "Apparel"
+  },
+  {
+    "id": "p1001",
+    "title": "Men's Classic Tee",
+    "description": "Soft cotton tee for everyday wear.",
+    "price": 29.99,
+    "category": "men's clothing",
+    "imageUrl": "https://images.unsplash.com/photo-1520975940400-9917f58c8d2b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "p1002",
+    "title": "Women's Denim Jacket",
+    "description": "Timeless denim layer with relaxed fit.",
+    "price": 79.99,
+    "category": "women's clothing",
+    "imageUrl": "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "p1003",
+    "title": "Stainless Steel Necklace",
+    "description": "Minimalist chain for daily styling.",
+    "price": 49.0,
+    "category": "jewelery",
+    "imageUrl": "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "p1004",
+    "title": "Noise-Canceling Headphones",
+    "description": "Over-ear wireless ANC headphones.",
+    "price": 199.0,
+    "category": "electronics",
+    "imageUrl": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "p1005",
+    "title": "Sports Running Shoes",
+    "description": "Breathable mesh upper, cushioned midsole.",
+    "price": 89.0,
+    "category": "men's clothing",
+    "imageUrl": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "p1006",
+    "title": "Gold-Plated Bracelet",
+    "description": "Elegant bracelet with secure clasp.",
+    "price": 59.0,
+    "category": "jewelery",
+    "imageUrl": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "p1007",
+    "title": "4K Action Camera",
+    "description": "Waterproof action cam with stabilization.",
+    "price": 149.0,
+    "category": "electronics",
+    "imageUrl": "https://images.unsplash.com/photo-1519183071298-a2962be96f83?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "p1008",
+    "title": "Women's Yoga Pants",
+    "description": "High-waist, 4-way stretch fabric.",
+    "price": 39.0,
+    "category": "women's clothing",
+    "imageUrl": "https://images.unsplash.com/photo-1506629905606-3bb0d23b0d61?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "p1009",
+    "title": "Smartwatch Series X",
+    "description": "Health tracking, GPS, and notifications.",
+    "price": 229.0,
+    "category": "electronics",
+    "imageUrl": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "p1010",
+    "title": "Minimalist Earrings",
+    "description": "Lightweight studs with smooth finish.",
+    "price": 19.0,
+    "category": "jewelery",
+    "imageUrl": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=800&auto=format&fit=crop"
+  }
+]
