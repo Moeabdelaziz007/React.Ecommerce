@@ -9,11 +9,13 @@ class EcommerceApp {
     }
 
     init() {
+        console.log('Initializing EcommerceApp...');
         this.loadProducts();
         this.setupEventListeners();
         this.updateCartCount();
         this.applyTheme();
         this.addScrollAnimations();
+        console.log('EcommerceApp initialization complete');
     }
 
     // Load sample products
@@ -409,5 +411,11 @@ function connectWallet(walletType) {
 // Initialize app when DOM is loaded
 let app;
 document.addEventListener('DOMContentLoaded', () => {
-    app = new EcommerceApp();
+    console.log('DOM loaded, initializing EcommerceApp...');
+    try {
+        app = new EcommerceApp();
+        console.log('EcommerceApp initialized successfully');
+    } catch (error) {
+        console.error('Error initializing EcommerceApp:', error);
+    }
 });
